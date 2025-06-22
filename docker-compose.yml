@@ -1,41 +1,24 @@
 version: "3.9"
 
 services:
-  # ───────────────────────────────────────────────────────── Redis ──
+  # ───────────────────────────────────── Redis (broker / backend)
   redis:
     image: redis:7-alpine
-    ports: ["6379:6379"]
 
-  # ─────────────────────────────────────────────────────── MailHog ──
-  mailhog:
-    image: mailhog/mailhog:v1.0.1
-    ports:
-      - "8025:8025"      # Web UI
-      - "1025:1025"      # SMTP
-
-  # ─────────────────────────────────────────────────────── Worker ──
+  # ───────────────────────────────────── Celery worker
   worker:
-    build: ./worker
+    build: ./worker                   # contains tasks.py + requirements.txt
     command: celery -A tasks worker --loglevel=info
-    environment:
-      CELERY_BROKER_URL: redis://redis:6379/0
-      CELERY_RESULT_BACKEND: redis://redis:6379/1
-      SMTP_HOST: mailhog
-      SMTP_PORT: 1025
-      FROM_EMAIL: noreply@example.com
-      CONTACT_NUMBER: "01234567890"
-    depends_on:
-      - redis
-      - mailhog
+    env_file: .env                    # << inject EVERYTHING from .env
+    depends_on: [redis]
 
-  # ────────────────────────────────────────────────────── Producer ──
+  # ───────────────────────────────────── Producer helper
   #
-  # Starts an *idle* container so you can exec into it and fire tasks
-  # or override the command at runtime.  Shares the same code/venv
-  # image as the worker for simplicity.
+  # Starts idle so you can exec into it (or run one-shot commands).
+  # Uses the same Python base to keep deps consistent.
   #
   producer:
     build: ./producer
-    entrypoint: ["sleep", "infinity"]   # keep it running
-    depends_on:
-      - redis
+    entrypoint: ["sleep", "infinity"]
+    env_file: .env                    # only needed if you want vars inside
+    depends_on: [redis]
