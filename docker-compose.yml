@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  # ───────────────────────────────────────────────────────── Redis ──
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  # ─────────────────────────────────────────────────────── MailHog ──
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "8025:8025"      # Web UI
+      - "1025:1025"      # SMTP
+
+  # ─────────────────────────────────────────────────────── Worker ──
+  worker:
+    build: ./worker
+    command: celery -A tasks worker --loglevel=info
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+      FROM_EMAIL: noreply@example.com
+      CONTACT_NUMBER: 017XXXXXXXXXXXX
+    depends_on:
+      - redis
+      - mailhog
+
+  # ────────────────────────────────────────────────────── Producer ──
+  #
+  # Starts an *idle* container so you can exec into it and fire tasks
+  # or override the command at runtime.  Shares the same code/venv
+  # image as the worker for simplicity.
+  #
+  producer:
+    build: ./producer
+    entrypoint: ["sleep", "infinity"]   # keep it running
+    depends_on:
+      - redis
