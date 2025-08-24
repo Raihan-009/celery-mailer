@@ -1,0 +1,14 @@
+{greeting}
+
+Congratulations! Your payment has been processed and you're now enrolled in "{course_name}".
+
+Enrollment details
+──────────────────
+• Learner ID : {user_id}
+• Course     : {course_name}
+• Date       : {today}
+
+Need help? WhatsApp {contact_number}
+
+Best regards,
+The {company_name} Team
