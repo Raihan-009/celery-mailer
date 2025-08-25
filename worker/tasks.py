@@ -10,8 +10,8 @@ app = Celery(
 )
 
 # ── Task definition ───────────────────────────────────────────
-@app.task(name="send_course_enrollment_email")
-def send_course_enrollment_email(course_name: str,
+@app.task(name="send_course_enrollment_email", bind=True)
+def send_course_enrollment_email(self, course_name: str,
                                  user_id: int,
                                  email: str,
                                  user_name: str | None = None):
@@ -31,12 +31,13 @@ def send_course_enrollment_email(course_name: str,
         course_name=course_name,
         user_id=user_id,
         email=email,
-        user_name=user_name
+        user_name=user_name,
+        task_id=self.request.id
     )
 
 # ── Additional email tasks ────────────────────────────────────
-@app.task(name="send_custom_email")
-def send_custom_email(to_email: str,
+@app.task(name="send_custom_email", bind=True)
+def send_custom_email(self, to_email: str,
                      subject: str,
                      plain_content: str,
                      html_content: str | None = None):
@@ -56,5 +57,6 @@ def send_custom_email(to_email: str,
         to_email=to_email,
         subject=subject,
         plain_content=plain_content,
-        html_content=html_content
+        html_content=html_content,
+        task_id=self.request.id
     )

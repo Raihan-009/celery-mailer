@@ -4,6 +4,7 @@ from email.message import EmailMessage
 from datetime import datetime
 from typing import Optional
 from pathlib import Path
+from database import db_manager
 
 
 class EmailService:
@@ -39,7 +40,8 @@ class EmailService:
                                    course_name: str,
                                    user_id: int,
                                    email: str,
-                                   user_name: Optional[str] = None) -> str:
+                                   user_name: Optional[str] = None,
+                                   task_id: Optional[str] = None) -> str:
         """
         Send course enrollment confirmation email.
         
@@ -48,20 +50,62 @@ class EmailService:
             user_id: User's ID
             email: Recipient email address
             user_name: Optional user name for personalization
+            task_id: Celery task ID for tracking
             
         Returns:
             Success or error message
         """
+        subject = f"🎉 Welcome to {course_name} – Enrollment Confirmed!"
+        
+        # Log email attempt to database
+        if task_id:
+            try:
+                db_manager.log_email_attempt(
+                    task_id=task_id,
+                    email=email,
+                    subject=subject,
+                    course_name=course_name,
+                    user_id=user_id,
+                    user_name=user_name,
+                    status="pending"
+                )
+            except Exception:
+                pass
+        
         try:
             msg = self._create_enrollment_email(course_name, user_id, email, user_name)
             
             with self._create_smtp_connection() as server:
                 server.send_message(msg)
             
+            # Update database with success status
+            if task_id:
+                try:
+                    db_manager.update_email_status(
+                        task_id=task_id,
+                        status="sent",
+                        sent_at=datetime.now()
+                    )
+                except Exception:
+                    pass
+            
             return f"✅ E-mail sent to {email} (course: {course_name}, ID: {user_id})"
         
         except Exception as err:
-            return f"❌ Failed to send e-mail → {err}"
+            error_msg = str(err)
+            
+            # Update database with failure status
+            if task_id:
+                try:
+                    db_manager.update_email_status(
+                        task_id=task_id,
+                        status="failed",
+                        error_message=error_msg
+                    )
+                except Exception:
+                    pass
+            
+            return f"❌ Failed to send e-mail → {error_msg}"
     
     def _create_enrollment_email(self, 
                                course_name: str,
@@ -138,7 +182,8 @@ class EmailService:
                          to_email: str,
                          subject: str,
                          plain_content: str,
-                         html_content: Optional[str] = None) -> str:
+                         html_content: Optional[str] = None,
+                         task_id: Optional[str] = None) -> str:
         """
         Send a custom email with plain text and optional HTML content.
         
@@ -147,10 +192,23 @@ class EmailService:
             subject: Email subject
             plain_content: Plain text content
             html_content: Optional HTML content
+            task_id: Celery task ID for tracking
             
         Returns:
             Success or error message
         """
+        # Log email attempt to database
+        if task_id:
+            try:
+                db_manager.log_email_attempt(
+                    task_id=task_id,
+                    email=to_email,
+                    subject=subject,
+                    status="pending"
+                )
+            except Exception:
+                pass
+        
         try:
             msg = EmailMessage()
             msg["Subject"] = subject
@@ -165,10 +223,34 @@ class EmailService:
             with self._create_smtp_connection() as server:
                 server.send_message(msg)
             
+            # Update database with success status
+            if task_id:
+                try:
+                    db_manager.update_email_status(
+                        task_id=task_id,
+                        status="sent",
+                        sent_at=datetime.now()
+                    )
+                except Exception:
+                    pass
+            
             return f"✅ Custom email sent to {to_email}"
         
         except Exception as err:
-            return f"❌ Failed to send custom email → {err}"
+            error_msg = str(err)
+            
+            # Update database with failure status
+            if task_id:
+                try:
+                    db_manager.update_email_status(
+                        task_id=task_id,
+                        status="failed",
+                        error_message=error_msg
+                    )
+                except Exception:
+                    pass
+            
+            return f"❌ Failed to send custom email → {error_msg}"
 
 
 # Create a global instance for easy importing

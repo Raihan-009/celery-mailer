@@ -1,16 +1,45 @@
 version: "3.9"
 
 services:
+  # ───────────────────────────────────── PostgreSQL (email tracking)
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: celery_mailer
+      POSTGRES_USER: mailer_user
+      POSTGRES_PASSWORD: mailer_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mailer_user -d celery_mailer"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
   # ───────────────────────────────────── Redis (broker / backend)
   redis:
     image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # ───────────────────────────────────── Celery worker
   worker:
     build: ./worker                   # contains tasks.py + requirements.txt
-    command: celery -A tasks worker --loglevel=info
+    command: ["bash", "/app/start_worker.sh"]
     env_file: .env                    # << inject EVERYTHING from .env
-    depends_on: [redis]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
 
   # ───────────────────────────────────── Producer helper
   #
@@ -21,4 +50,11 @@ services:
     build: ./producer
     entrypoint: ["sleep", "infinity"]
     env_file: .env                    # only needed if you want vars inside
-    depends_on: [redis]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
