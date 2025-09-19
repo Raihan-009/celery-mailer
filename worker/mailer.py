@@ -75,7 +75,7 @@ class EmailService:
     
     def send_course_enrollment_email(self, 
                                    course_name: str,
-                                   user_id: int,
+                                   user_id: str,
                                    email: str,
                                    user_name: Optional[str] = None,
                                    task_id: Optional[str] = None) -> str:
@@ -146,7 +146,7 @@ class EmailService:
     
     def _create_enrollment_email(self, 
                                course_name: str,
-                               user_id: int,
+                               user_id: str,
                                email: str,
                                user_name: Optional[str] = None) -> EmailMessage:
         """Create enrollment email message with both plain text and HTML versions."""
@@ -180,7 +180,7 @@ class EmailService:
     def _create_plain_text_content(self, 
                                  greeting: str,
                                  course_name: str,
-                                 user_id: int,
+                                 user_id: str,
                                  today: str) -> str:
         """Create plain text email content."""
         template_path = Path(__file__).parent / "templates" / "plain_text_enrollment.txt"
@@ -200,7 +200,7 @@ class EmailService:
     def _create_html_content(self, 
                            greeting: str,
                            course_name: str,
-                           user_id: int,
+                           user_id: str,
                            today: str) -> str:
         """Create HTML email content."""
         template_path = Path(__file__).parent / "templates" / "html_enrollment.html"

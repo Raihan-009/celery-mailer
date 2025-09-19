@@ -32,7 +32,7 @@ class EmailTracking(Base):
     email = Column(String(255), nullable=False, index=True)
     subject = Column(String(500), nullable=False)
     course_name = Column(String(255), nullable=True)
-    user_id = Column(Integer, nullable=True)
+    user_id = Column(String(255), nullable=True)
     user_name = Column(String(255), nullable=True)
     status = Column(String(50), nullable=False, default="pending", index=True)
     sent_at = Column(DateTime, nullable=True)

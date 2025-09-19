@@ -12,7 +12,7 @@ app = Celery(
 # ── Task definition ───────────────────────────────────────────
 @app.task(name="send_course_enrollment_email", bind=True)
 def send_course_enrollment_email(self, course_name: str,
-                                 user_id: int,
+                                 user_id: str,
                                  email: str,
                                  user_name: str | None = None):
     """

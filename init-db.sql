@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS email_tracking (
     email VARCHAR(255) NOT NULL,
     subject VARCHAR(500) NOT NULL,
     course_name VARCHAR(255),
-    user_id INTEGER,
+    user_id VARCHAR(255),
     user_name VARCHAR(255),
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
     sent_at TIMESTAMP,

@@ -12,7 +12,7 @@ if len(sys.argv) != 4:
     print("Usage: python producer.py <course_name> <user_id> <email>")
     sys.exit(1)
 
-course, uid, email = sys.argv[1], int(sys.argv[2]), sys.argv[3]
+course, uid, email = sys.argv[1], sys.argv[2], sys.argv[3]
 
 BROKER = "redis://redis:6379/0"        # <─ service name reachable on network
 celery = Celery("producer", broker=BROKER)
