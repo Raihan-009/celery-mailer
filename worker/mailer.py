@@ -1,6 +1,7 @@
 import os
 import smtplib
 from email.message import EmailMessage
+from email.mime.image import MIMEImage
 from datetime import datetime
 from typing import Optional
 from pathlib import Path
@@ -35,6 +36,42 @@ class EmailService:
             server.login(self.user, self.password)
         
         return server
+    
+    def _attach_images(self, msg: EmailMessage) -> None:
+        """Attach local images as inline attachments with CID references."""
+        images_dir = Path(__file__).parent / "images"
+        
+        # Define image mappings
+        image_files = {
+            "logo": "logo.png",  # Poridhi logo
+            "success_icon": "success_icon.png"  # Success checkmark icon
+        }
+        
+        for cid, filename in image_files.items():
+            image_path = images_dir / filename
+            if image_path.exists():
+                with open(image_path, 'rb') as f:
+                    image_data = f.read()
+                
+                # Determine MIME type based on file extension
+                if filename.lower().endswith('.png'):
+                    mime_type = 'image/png'
+                elif filename.lower().endswith('.jpg') or filename.lower().endswith('.jpeg'):
+                    mime_type = 'image/jpeg'
+                elif filename.lower().endswith('.gif'):
+                    mime_type = 'image/gif'
+                else:
+                    mime_type = 'image/png'  # Default fallback
+                
+                # Create MIMEImage and set headers
+                image = MIMEImage(image_data, _subtype=mime_type.split('/')[1])
+                image.add_header('Content-ID', f'<{cid}>')
+                image.add_header('Content-Disposition', 'inline', filename=filename)
+                
+                # Attach to message
+                msg.attach(image)
+            else:
+                print(f"Warning: Image file not found: {image_path}")
     
     def send_course_enrollment_email(self, 
                                    course_name: str,
@@ -134,6 +171,9 @@ class EmailService:
             greeting, course_name, user_id, today
         )
         msg.add_alternative(html_content, subtype="html")
+        
+        # Attach inline images
+        self._attach_images(msg)
         
         return msg
     
