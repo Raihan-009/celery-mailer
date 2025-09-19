@@ -66,7 +66,7 @@ class EmailService:
                 # Create MIMEImage and set headers
                 image = MIMEImage(image_data, _subtype=mime_type.split('/')[1])
                 image.add_header('Content-ID', f'<{cid}>')
-                image.add_header('Content-Disposition', 'inline', filename=filename)
+                image.add_header('Content-Disposition', f'inline; filename="{filename}"')
                 
                 # Attach to message
                 msg.attach(image)
