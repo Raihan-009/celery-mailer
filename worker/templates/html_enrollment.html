@@ -1,136 +1,540 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Enrollment Confirmed</title>
-</head>
-<body style="margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; line-height: 1.4;">
-    
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial,
+        sans-serif;
+      background-color: #f5f5f5;
+      line-height: 1.4;
+    "
+  >
     <!-- Main container -->
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        
-        <!-- Header -->
-        <tr>
-            <td style="padding: 30px 30px 20px; padding: 20px 15px; background: linear-gradient(135deg, #e8f4fd 0%, #f0f8ff 100%); border-radius: 12px 12px 0 0;">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-                    <tr>
-                        <td style="vertical-align: top;">
-                            <img src="cid:logo" alt="Poridhi.io" style="display: block; margin-bottom: 8px; height: 20px; width: auto;" />
-                            <h1 style="margin: 0; font-size: 28px; font-size: 24px; font-weight: 700; color: #1f2937;">Enrollment Confirmed</h1>
-                            <p style="margin: 5px 0 0; color: #6b7280; font-size: 16px; font-size: 14px;">Welcome to poridhi</p>
-                        </td>
-                        <td style="vertical-align: top; text-align: right; width: 80px; width: 60px;">
-                            <!-- Checkmark badge -->
-                            <img src="cid:success_icon" alt="Enrollment Confirmed" style="display: block; width: 60px; width: 50px; height: 60px; height: 50px; border-radius: 50%;" />
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        
-        <!-- Welcome message -->
-        <tr>
-            <td style="padding: 20px 30px; padding: 15px 15px;">
-                <p style="margin: 0; font-size: 18px; font-size: 16px; color: #1f2937; font-weight: 500;">Dear Learner,</p>
-                <div style="margin: 15px 0; padding: 15px; padding: 12px; background-color: #d1fae5; border: 1px solid #86efac; border-radius: 8px;">
-                    <p style="margin: 0; color: #065f46; font-size: 16px; font-size: 14px;">
-                        Payment successful! You're enrolled in <strong>"Advanced DevOps Engineering"</strong>
-                    </p>
-                </div>
-            </td>
-        </tr>
-        
-        <!-- Your Details section -->
-        <tr>
-            <td style="padding: 0 30px; padding: 0 15px;">
-                <div style="background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%); padding: 12px 20px; padding: 10px 15px; border-radius: 8px 8px 0 0;">
-                    <h2 style="margin: 0; color: white; font-size: 18px; font-size: 16px; font-weight: 600;">📄 Your Details</h2>
-                </div>
-                <div style="background-color: #fafafa; padding: 20px; padding: 15px; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none;">
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #374151; font-size: 16px; font-size: 14px; vertical-align: top; width: 30%;">Learner ID:</td>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #1f2937; font-size: 16px; font-size: 14px; font-weight: 600; text-align: right;">{user_id}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #374151; font-size: 16px; font-size: 14px; vertical-align: top;">Course:</td>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #1f2937; font-size: 16px; font-size: 14px; font-weight: 600; text-align: right;">{course_name}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #374151; font-size: 16px; font-size: 14px; vertical-align: top;">Start Date:</td>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #1f2937; font-size: 16px; font-size: 14px; font-weight: 600; text-align: right;">{today}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px 0; padding: 6px 0; color: #374151; font-size: 16px; font-size: 14px; vertical-align: top;">Status:</td>
-                            <td style="padding: 8px 0; padding: 6px 0; text-align: right;">
-                                <span style="background-color: #10b981; color: white; padding: 4px 12px; padding: 3px 10px; border-radius: 6px; font-size: 14px; font-size: 12px; font-weight: 600;">Active</span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-        
-        <!-- What's Next section -->
-        <tr>
-            <td style="padding: 25px 30px 20px; padding: 20px 15px 15px;">
-                <div style="background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%); padding: 12px 20px; padding: 10px 15px; border-radius: 8px 8px 0 0;">
-                    <h2 style="margin: 0; color: white; font-size: 18px; font-size: 16px; font-weight: 600;">🚀 What's Next?</h2>
-                </div>
-                <div style="background-color: #fafafa; padding: 20px; padding: 15px; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none;">
-                    
-                    <!-- Step 1 -->
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%; margin-bottom: 15px; margin-bottom: 12px;">
-                        <tr>
-                            <td style="vertical-align: top; width: 70px; width: 60px;">
-                                <div style="background-color: #4f46e5; color: white; padding: 6px 10px; padding: 5px 8px; border-radius: 6px; font-size: 14px; font-size: 12px; font-weight: 600; text-align: center; white-space: nowrap;">Step 1</div>
-                            </td>
-                            <td style="vertical-align: top; padding-left: 15px; padding-left: 10px;">
-                                <p style="margin: 0; color: #1f2937; font-size: 16px; font-size: 14px;">Join our course community & network</p>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <!-- Step 2 -->
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%; margin-bottom: 15px; margin-bottom: 12px;">
-                        <tr>
-                            <td style="vertical-align: top; width: 70px; width: 60px;">
-                                <div style="background-color: #4f46e5; color: white; padding: 6px 10px; padding: 5px 8px; border-radius: 6px; font-size: 14px; font-size: 12px; font-weight: 600; text-align: center; white-space: nowrap;">Step 2</div>
-                            </td>
-                            <td style="vertical-align: top; padding-left: 15px; padding-left: 10px;">
-                                <p style="margin: 0; color: #1f2937; font-size: 16px; font-size: 14px;">Access your learning materials</p>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <!-- Step 3 -->
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td style="vertical-align: top; width: 70px; width: 60px;">
-                                <div style="background-color: #4f46e5; color: white; padding: 6px 10px; padding: 5px 8px; border-radius: 6px; font-size: 14px; font-size: 12px; font-weight: 600; text-align: center; white-space: nowrap;">Step 3</div>
-                            </td>
-                            <td style="vertical-align: top; padding-left: 15px; padding-left: 10px;">
-                                <p style="margin: 0; color: #1f2937; font-size: 16px; font-size: 14px;">Get acquainted with course prerequisites if needed</p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-        
-        <!-- Help section -->
-        <tr>
-            <td style="padding: 0 30px 30px; padding: 0 15px 20px;">
-                <div style="background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%); padding: 20px; padding: 15px; border-radius: 12px; text-align: center;">
-                    <h3 style="margin: 0 0 8px; color: white; font-size: 18px; font-size: 16px; font-weight: 600;">Need Help?</h3>
-                    <p style="margin: 0 0 15px; margin: 0 0 12px; color: #f3e8ff; font-size: 16px; font-size: 14px;">WhatsApp us for instant support:</p>
-                    <a href="https://wa.me/{contact_number_clean}" style="background-color: #1f2937; color: white; padding: 10px 20px; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 16px; font-size: 14px; font-weight: 600; display: inline-block;">{contact_number}</a>
-                </div>
-            </td>
-        </tr>
-        
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      style="
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <!-- Header -->
+      <tr>
+        <td
+          style="
+            padding: 30px 30px 20px;
+            padding: 20px 15px;
+            background: #fafafa;
+            border-radius: 12px 12px 0 0;
+          "
+        >
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            style="width: 100%"
+          >
+            <tr>
+              <td style="vertical-align: top">
+                <img
+                  src="https://s3.brilliant.com.bd/blog-bucket/fileavatar/3ee7e7b6-b987-4dcd-a0af-cb75220b5698.png"
+                  alt="Poridhi.io"
+                  style="
+                    display: block;
+                    margin-bottom: 4px;
+                    height: 20px;
+                    width: auto;
+                    object-fit: contain;
+                  "
+                />
+                <h1
+                  style="
+                    margin: 0;
+                    font-size: 28px;
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #000000;
+                  "
+                >
+                  Enrollment Confirmed
+                </h1>
+                <p
+                  style="
+                    margin: 5px 0 0;
+                    color: #6b7280;
+                    font-size: 16px;
+                    font-size: 14px;
+                  "
+                >
+                  Welcome to poridhi
+                </p>
+              </td>
+              <td
+                style="
+                  vertical-align: middle;
+                  text-align: right;
+                  width: 80px;
+                  width: 60px;
+                "
+              >
+                <!-- Checkmark badge -->
+                <img
+                  src="https://s3.brilliant.com.bd/blog-bucket/fileavatar/f9b585ef-61e0-42b7-b544-28d024a7a86e.png"
+                  alt="Enrollment Confirmed"
+                  style="
+                    display: block;
+                    width: 64px;
+                    height: 64px;
+                    object-fit: contain;
+                    border-radius: 50%;
+                  "
+                />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Welcome message -->
+      <tr>
+        <td style="padding: 20px 30px; padding: 15px 15px">
+          <p
+            style="
+              margin: 0;
+              font-size: 18px;
+              font-size: 16px;
+              color: #1f2937;
+              font-weight: 500;
+            "
+          >
+            Dear Learner,
+          </p>
+          <div
+            style="
+              margin: 15px 0;
+              padding: 15px;
+              padding: 12px;
+              background-color: #d1fae5;
+              border: 1px solid #86efac;
+              border-radius: 8px;
+            "
+          >
+            <p
+              style="
+                margin: 0;
+                color: #065f46;
+                font-size: 16px;
+                font-size: 14px;
+              "
+            >
+              Payment successful! You're enrolled in
+              <strong>"Advanced DevOps Engineering"</strong>
+            </p>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Your Details section -->
+      <tr>
+        <td style="padding: 0 30px; padding: 0 15px">
+          <div
+            style="
+              background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+              padding: 12px 20px;
+              padding: 10px 15px;
+              border-radius: 8px 8px 0 0;
+            "
+          >
+            <h2
+              style="
+                margin: 0;
+                color: white;
+                font-size: 18px;
+                font-size: 16px;
+                font-weight: 600;
+              "
+            >
+              📄 Your Details
+            </h2>
+          </div>
+          <div
+            style="
+              background-color: #fafafa;
+              padding: 20px;
+              padding: 15px;
+              border-radius: 0 0 8px 8px;
+              border: 1px solid #e5e7eb;
+              border-top: none;
+            "
+          >
+            <table
+              role="presentation"
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              style="width: 100%"
+            >
+              <tr>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #374151;
+                    font-size: 16px;
+                    font-size: 14px;
+                    vertical-align: top;
+                    width: 30%;
+                  "
+                >
+                  Learner ID:
+                </td>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #1f2937;
+                    font-size: 16px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-align: right;
+                  "
+                >
+                  {user_id}
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #374151;
+                    font-size: 16px;
+                    font-size: 14px;
+                    vertical-align: top;
+                  "
+                >
+                  Course:
+                </td>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #1f2937;
+                    font-size: 16px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-align: right;
+                  "
+                >
+                  {course_name}
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #374151;
+                    font-size: 16px;
+                    font-size: 14px;
+                    vertical-align: top;
+                  "
+                >
+                  Start Date:
+                </td>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #1f2937;
+                    font-size: 16px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-align: right;
+                  "
+                >
+                  {today}
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    padding: 8px 0;
+                    padding: 6px 0;
+                    color: #374151;
+                    font-size: 16px;
+                    font-size: 14px;
+                    vertical-align: top;
+                  "
+                >
+                  Status:
+                </td>
+                <td style="padding: 8px 0; padding: 6px 0; text-align: right">
+                  <span
+                    style="
+                      color: #0e6a4c;
+                      border-radius: 6px;
+                      font-size: 14px;
+                      font-weight: 600;
+                    "
+                    >Active</span
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+
+      <!-- What's Next section -->
+      <tr>
+        <td style="padding: 25px 30px 20px; padding: 20px 15px 15px">
+          <div
+            style="
+              background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+              padding: 12px 20px;
+              padding: 10px 15px;
+              border-radius: 8px 8px 0 0;
+            "
+          >
+            <h2
+              style="
+                margin: 0;
+                color: white;
+                font-size: 18px;
+                font-size: 16px;
+                font-weight: 600;
+              "
+            >
+              🚀 What's Next?
+            </h2>
+          </div>
+          <div
+            style="
+              background-color: #fafafa;
+              padding: 20px;
+              padding: 15px;
+              border-radius: 0 0 8px 8px;
+              border: 1px solid #e5e7eb;
+              border-top: none;
+            "
+          >
+            <!-- Step 1 -->
+            <table
+              role="presentation"
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              style="width: 100%; margin-bottom: 15px; margin-bottom: 12px"
+            >
+              <tr>
+                <td style="vertical-align: top; width: 70px; width: 60px">
+                  <div
+                    style="
+                      background-color: #4f46e5;
+                      color: white;
+                      padding: 6px 10px;
+                      padding: 5px 8px;
+                      border-radius: 6px;
+                      font-size: 14px;
+                      font-size: 12px;
+                      font-weight: 600;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                  >
+                    Step 1
+                  </div>
+                </td>
+                <td
+                  style="
+                    vertical-align: top;
+                    padding-left: 15px;
+                    padding-left: 10px;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      color: #1f2937;
+                      font-size: 16px;
+                      font-size: 14px;
+                    "
+                  >
+                    Join our course community & network
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Step 2 -->
+            <table
+              role="presentation"
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              style="width: 100%; margin-bottom: 15px; margin-bottom: 12px"
+            >
+              <tr>
+                <td style="vertical-align: top; width: 70px; width: 60px">
+                  <div
+                    style="
+                      background-color: #4f46e5;
+                      color: white;
+                      padding: 6px 10px;
+                      padding: 5px 8px;
+                      border-radius: 6px;
+                      font-size: 14px;
+                      font-size: 12px;
+                      font-weight: 600;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                  >
+                    Step 2
+                  </div>
+                </td>
+                <td
+                  style="
+                    vertical-align: top;
+                    padding-left: 15px;
+                    padding-left: 10px;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      color: #1f2937;
+                      font-size: 16px;
+                      font-size: 14px;
+                    "
+                  >
+                    Access your learning materials
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Step 3 -->
+            <table
+              role="presentation"
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              style="width: 100%"
+            >
+              <tr>
+                <td style="vertical-align: top; width: 70px; width: 60px">
+                  <div
+                    style="
+                      background-color: #4f46e5;
+                      color: white;
+                      padding: 6px 10px;
+                      padding: 5px 8px;
+                      border-radius: 6px;
+                      font-size: 14px;
+                      font-size: 12px;
+                      font-weight: 600;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                  >
+                    Step 3
+                  </div>
+                </td>
+                <td
+                  style="
+                    vertical-align: top;
+                    padding-left: 15px;
+                    padding-left: 10px;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      color: #1f2937;
+                      font-size: 16px;
+                      font-size: 14px;
+                    "
+                  >
+                    Get acquainted with course prerequisites if needed
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Help section -->
+      <tr>
+        <td style="padding: 0 30px 30px; padding: 0 15px 20px">
+          <div
+            style="
+              background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+              padding: 20px;
+              padding: 15px;
+              border-radius: 12px;
+              text-align: center;
+            "
+          >
+            <h3
+              style="
+                margin: 0 0 8px;
+                color: white;
+                font-size: 18px;
+                font-size: 16px;
+                font-weight: 600;
+              "
+            >
+              Need Help?
+            </h3>
+            <p
+              style="
+                margin: 0 0 15px;
+                margin: 0 0 12px;
+                color: #f3e8ff;
+                font-size: 16px;
+                font-size: 14px;
+              "
+            >
+              WhatsApp us for instant support:
+            </p>
+            <a
+              href="https://wa.me/{contact_number_clean}"
+              style="
+                background-color: #1f2937;
+                color: white;
+                padding: 10px 20px;
+                padding: 8px 16px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 16px;
+                font-size: 14px;
+                font-weight: 600;
+                display: inline-block;
+              "
+              >{contact_number}</a
+            >
+          </div>
+        </td>
+      </tr>
     </table>
-    
-</body>
+  </body>
 </html>
